@@ -2,3 +2,5 @@
 .vs/
 bin/
 obj/
+Migrations/
+Tasks.db
