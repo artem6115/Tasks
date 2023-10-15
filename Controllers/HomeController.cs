@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using WebTasks.Data.DataLayer;
 using WebTasks.Models;
 
 namespace WebTasks.Controllers
@@ -12,15 +13,19 @@ namespace WebTasks.Controllers
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
+        private readonly TaskDbContext _context;
 
-		public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(TaskDbContext context,ILogger<HomeController> logger)
 		{
+			_context = context;
 			_logger = logger;
 		}
 
 		public IActionResult Index()
 		{
-			return View();
+
+			return View(_context.Directories.ToList());
 		}
 
 		public IActionResult Privacy()

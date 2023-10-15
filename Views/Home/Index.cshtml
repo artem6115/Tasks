@@ -1,8 +1,18 @@
-﻿@{
+﻿@using DataLayer.Entities;
+@{
     ViewData["Title"] = "Home Page";
 }
-
+@model List<Directories>
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+   @foreach (Directories item in Model)
+    {
+        <div class="row">
+            <p>@item.Title</p><br>
+            @foreach (var task in item.MyTasks)
+            {
+                <p class="ml-3 pl-3 alert-success">@task.Title</p>
+            }
+            <hr>
+        </div>
+    }
 </div>
