@@ -13,10 +13,10 @@ namespace WebTasks.Controllers
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
-        private readonly TaskDbContext _context;
+        private readonly IDataBaseAdapter _context;
 
 
-        public HomeController(TaskDbContext context,ILogger<HomeController> logger)
+        public HomeController(IDataBaseAdapter context,ILogger<HomeController> logger)
 		{
 			_context = context;
 			_logger = logger;
@@ -25,7 +25,7 @@ namespace WebTasks.Controllers
 		public IActionResult Index()
 		{
 
-			return View(_context.Directories.ToList());
+			return View(_context.GetAllDirectories());
 		}
 
 		public IActionResult Privacy()
