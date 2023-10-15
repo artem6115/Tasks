@@ -10,7 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using WebTasks.Data.DataLayer;
-
+using WebTasks.Models;
 namespace WebTasks
 {
 	public class Startup
@@ -28,6 +28,7 @@ namespace WebTasks
 			string DbStr =Configuration.GetConnectionString("ConnectionString") ;
 			services.AddDbContext<TaskDbContext>(options=>options.UseSqlite(DbStr));
 			services.AddControllersWithViews();
+			services.AddTransient<IDataBaseAdapter, MockDbAdapter>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
