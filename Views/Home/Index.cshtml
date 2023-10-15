@@ -4,11 +4,12 @@
 }
 @model List<Directories>
 <div class="text-center">
+   
    @foreach (Directories item in Model)
     {
         <div class="row">
             <p>@item.Title</p><br>
-            @foreach (var task in item.MyTasks)
+            @foreach (var task in item.MyTasks ?? new List<Tasks>(0))
             {
                 <p class="ml-3 pl-3 alert-success">@task.Title</p>
             }
