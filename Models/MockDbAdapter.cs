@@ -1,4 +1,5 @@
 ﻿using DataLayer.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using WebTasks.Data.DataLayer;
@@ -62,9 +63,9 @@ namespace WebTasks.Models
             return CurrentDir;
         }
 
-        IEnumerable<Directories> IDataBaseAdapter.GetAllDirectories() => context.Directories.ToList();
+        IEnumerable<Directories> IDataBaseAdapter.GetAllDirectories() => context.Directories.Include(x=>x.MyTasks).ToList();
 
-        Directories IDataBaseAdapter.GetDirectories(int id)=>context.Directories.First(x=>x.Id== id);
+        Directories IDataBaseAdapter.GetDirectories(int id)=>context.Directories.Include(x => x.MyTasks).First(x=>x.Id== id);
 
         Directories IDataBaseAdapter.ReplaceAllTasks(Directories dir, IEnumerable<Tasks> tasks)
         {
