@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Entities
 {
-	public class Directories : Page
+	public class Directory : Page
 	{
 		public List<Tasks> MyTasks{ get; set; }
 	}

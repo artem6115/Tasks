@@ -8,6 +8,6 @@ namespace DataLayer.Entities
 {
 	public class Tasks : Page
 	{
-		public Directories Directory { get; set; }
+		public Directory Directory { get; set; }
 	}
 }

@@ -9,7 +9,7 @@ namespace WebTasks.Data.DataLayer
 	public class TaskDbContext :DbContext
 	{
 		public TaskDbContext(DbContextOptions<TaskDbContext>options):base(options){}
-		public DbSet<Directories> Directories { get; set; }
+		public DbSet<Directory> Directories { get; set; }
 		public DbSet<Tasks> Tasks { get; set; }
 
 	}

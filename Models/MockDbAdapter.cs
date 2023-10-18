@@ -10,22 +10,22 @@ namespace WebTasks.Models
     {
         public readonly TaskDbContext context;
         public MockDbAdapter(TaskDbContext context)=>this.context = context;
-        Directories IDataBaseAdapter.AddDirectory(Directories dir) { 
+        Directory IDataBaseAdapter.AddDirectory(Directory dir) { 
             
             var directory = context.Directories.Add(dir).Entity;
             context.SaveChanges();
             return directory;
             }
 
-        Directories IDataBaseAdapter.AddDirectory(string title)
+        Directory IDataBaseAdapter.AddDirectory(string title)
         {
-            var directory= context.Directories.Add(new Directories() { Title = title }).Entity;
+            var directory= context.Directories.Add(new Directory() { Title = title }).Entity;
             context.SaveChanges();
             return directory;
 
         }
 
-        Directories IDataBaseAdapter.AddTasks(Directories dir, IEnumerable<Tasks> tasks)
+        Directory IDataBaseAdapter.AddTasks(Directory dir, IEnumerable<Tasks> tasks)
         {
             var CurrentDir = context.Directories.First(x => x.Id == dir.Id);
             if (CurrentDir == null) return null;
@@ -36,7 +36,7 @@ namespace WebTasks.Models
 
         }
 
-        Directories IDataBaseAdapter.DeleteAllTasks(Directories dir)
+        Directory IDataBaseAdapter.DeleteAllTasks(Directory dir)
         {
             var CurrentDir = context.Directories.First(x => x.Id == dir.Id);
             if (CurrentDir == null) return null;
@@ -45,7 +45,7 @@ namespace WebTasks.Models
             return CurrentDir;
         }
 
-        Directories IDataBaseAdapter.DeleteDirectories(Directories dir)
+        Directory IDataBaseAdapter.DeleteDirectories(Directory dir)
         {
             var CurrentDir = context.Directories.First(x=>x.Id==dir.Id);
             if (CurrentDir == null) return null;
@@ -54,7 +54,7 @@ namespace WebTasks.Models
             return CurrentDir;
         }
 
-        Directories IDataBaseAdapter.DeleteDirectories(int id)
+        Directory IDataBaseAdapter.DeleteDirectories(int id)
         {
             var CurrentDir = context.Directories.First(x => x.Id == id);
             if (CurrentDir == null) return null;
@@ -63,11 +63,11 @@ namespace WebTasks.Models
             return CurrentDir;
         }
 
-        IEnumerable<Directories> IDataBaseAdapter.GetAllDirectories() => context.Directories.Include(x=>x.MyTasks).ToList();
+        IEnumerable<Directory> IDataBaseAdapter.GetAllDirectories() => context.Directories.Include(x=>x.MyTasks).ToList();
 
-        Directories IDataBaseAdapter.GetDirectories(int id)=>context.Directories.Include(x => x.MyTasks).First(x=>x.Id== id);
+        Directory IDataBaseAdapter.GetDirectories(int id)=>context.Directories.Include(x => x.MyTasks).First(x=>x.Id== id);
 
-        Directories IDataBaseAdapter.ReplaceAllTasks(Directories dir, IEnumerable<Tasks> tasks)
+        Directory IDataBaseAdapter.ReplaceAllTasks(Directory dir, IEnumerable<Tasks> tasks)
         {
             var CurrentDir = context.Directories.First(x => x.Id == dir.Id);
             if (CurrentDir == null) return null;

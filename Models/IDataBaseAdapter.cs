@@ -5,15 +5,15 @@ namespace WebTasks.Models
 {
     public interface IDataBaseAdapter
     {
-        Directories AddDirectory(Directories dir);
-        Directories AddDirectory(string title);
-        Directories AddTasks(Directories dir , IEnumerable<Tasks> tasks);
-        Directories ReplaceAllTasks(Directories dir, IEnumerable<Tasks> tasks);
-        Directories DeleteAllTasks(Directories dir);
-        Directories DeleteDirectories(Directories dir);
-        Directories DeleteDirectories(int id);
-        Directories GetDirectories(int id);
-        IEnumerable<Directories> GetAllDirectories();
+        Directory AddDirectory(Directory dir);
+        Directory AddDirectory(string title);
+        Directory AddTasks(Directory dir , IEnumerable<Tasks> tasks);
+        Directory ReplaceAllTasks(Directory dir, IEnumerable<Tasks> tasks);
+        Directory DeleteAllTasks(Directory dir);
+        Directory DeleteDirectories(Directory dir);
+        Directory DeleteDirectories(int id);
+        Directory GetDirectories(int id);
+        IEnumerable<Directory> GetAllDirectories();
 
 
 
