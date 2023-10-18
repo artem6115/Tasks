@@ -6,7 +6,7 @@ namespace WebTasks.Models
 {
     public class TasksViewModel:PageViewModel
     {
-        public Tasks Taks { get; set; }       
+        public Tasks Task { get; set; }       
     }
     public class TasksEditModel : PageEditModel
     {

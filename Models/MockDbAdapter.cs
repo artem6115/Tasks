@@ -10,6 +10,18 @@ namespace WebTasks.Models
     {
         public readonly TaskDbContext context;
         public MockDbAdapter(TaskDbContext context)=>this.context = context;
+
+        public Directory EditDirectoryTitle(Directory dir)
+        {
+            var directory = context.Directories.First(x=>x.Id== dir.Id);
+            if (directory == null)
+            {
+                directory.Title = dir.Title;
+                context.SaveChanges();
+            }
+            return directory;
+        }
+
         Directory IDataBaseAdapter.AddDirectory(Directory dir) { 
             
             var directory = context.Directories.Add(dir).Entity;
@@ -25,15 +37,22 @@ namespace WebTasks.Models
 
         }
 
-        Directory IDataBaseAdapter.AddTasks(Directory dir, IEnumerable<Tasks> tasks)
+        Directory IDataBaseAdapter.AddTask(Tasks task)
         {
-            var CurrentDir = context.Directories.First(x => x.Id == dir.Id);
+            var CurrentDir = context.Directories.First(x => x.Id == task.Directory.Id);
             if (CurrentDir == null) return null;
-            foreach (var item in CurrentDir.MyTasks) CurrentDir.MyTasks.Add(item);
+            CurrentDir.MyTasks.Add(task);
             context.SaveChanges ();
             return CurrentDir;
-
-
+        }
+        Directory IDataBaseAdapter.EditTask(Tasks task)
+        {
+            var CurrentDir = context.Directories.First(x => x.Id == task.Directory.Id);
+            var CurrentTask= context.Tasks.First(x => x.Id == task.Id);
+            if (CurrentDir == null || CurrentTask == null) return null;
+            CurrentTask.Title=task.Title;
+            context.SaveChanges();
+            return CurrentDir;
         }
 
         Directory IDataBaseAdapter.DeleteAllTasks(Directory dir)
@@ -65,7 +84,7 @@ namespace WebTasks.Models
 
         IEnumerable<Directory> IDataBaseAdapter.GetAllDirectories() => context.Directories.Include(x=>x.MyTasks).ToList();
 
-        Directory IDataBaseAdapter.GetDirectories(int id)=>context.Directories.Include(x => x.MyTasks).First(x=>x.Id== id);
+        Directory IDataBaseAdapter.GetDirectory(int id)=>context.Directories.Include(x => x.MyTasks).First(x=>x.Id== id);
 
         Directory IDataBaseAdapter.ReplaceAllTasks(Directory dir, IEnumerable<Tasks> tasks)
         {
@@ -76,5 +95,7 @@ namespace WebTasks.Models
             context.SaveChanges();
             return CurrentDir;
         }
+
+        public Tasks GetTask(int id)=>context.Tasks.First(x=>x.Id == id);
     }
 }

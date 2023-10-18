@@ -7,19 +7,15 @@ namespace WebTasks.Models
     {
         Directory AddDirectory(Directory dir);
         Directory AddDirectory(string title);
-        Directory AddTasks(Directory dir , IEnumerable<Tasks> tasks);
+        Directory AddTask(Tasks task);
         Directory ReplaceAllTasks(Directory dir, IEnumerable<Tasks> tasks);
         Directory DeleteAllTasks(Directory dir);
         Directory DeleteDirectories(Directory dir);
         Directory DeleteDirectories(int id);
-        Directory GetDirectories(int id);
+        Directory GetDirectory(int id);
         IEnumerable<Directory> GetAllDirectories();
-
-
-
-
-
-
-
+        Directory EditDirectoryTitle(Directory dir);
+        Directory EditTask(Tasks addMoedel);
+        Tasks GetTask(int id);
     }
 }
