@@ -10,12 +10,13 @@ namespace WebTasks.Models
         Directory AddTask(Tasks task);
         Directory ReplaceAllTasks(Directory dir, IEnumerable<Tasks> tasks);
         Directory DeleteAllTasks(Directory dir);
-        Directory DeleteDirectories(Directory dir);
+        Directory DeleteDirectory(Directory dir);
         Directory DeleteDirectories(int id);
         Directory GetDirectory(int id);
         IEnumerable<Directory> GetAllDirectories();
         Directory EditDirectoryTitle(Directory dir);
         Directory EditTask(Tasks addMoedel);
         Tasks GetTask(int id);
+        Tasks DeleteTask(Tasks moedel);
     }
 }

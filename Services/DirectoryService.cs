@@ -41,6 +41,11 @@ namespace WebTasks.Services
                 Title=model.Title};
             Context.EditDirectoryTitle(ReplaceMoedel);
          }
+        public void DeleteDirectory(DirectoryEditModel model)
+        {
+            var ReplaceMoedel = new Directory() {Id = model.Id,};
+            Context.DeleteDirectory(ReplaceMoedel);
+        }
         public void AddDirectory(DirectoryEditModel model)
         {
             var AddMoedel = new Directory()

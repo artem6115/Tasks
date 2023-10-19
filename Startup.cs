@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using WebTasks.Data.DataLayer;
 using WebTasks.Models;
+using WebTasks.Services;
+
 namespace WebTasks
 {
 	public class Startup
@@ -29,10 +31,13 @@ namespace WebTasks
 			services.AddDbContext<TaskDbContext>(options=>options.UseSqlite(DbStr));
 			services.AddControllersWithViews();
 			services.AddTransient<IDataBaseAdapter, MockDbAdapter>();
-		}
+            services.AddTransient<DirectoryService>();
+            services.AddTransient<TasksService>();
 
-		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
 			if (env.IsDevelopment())
 			{

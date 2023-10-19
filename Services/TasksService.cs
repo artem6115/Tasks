@@ -36,6 +36,19 @@ namespace WebTasks.Services
             };
             Context.EditTask(AddMoedel);
         }
+        public void DeleteTask(TasksEditModel model)
+        {
+            var Dir = Context.GetDirectory(model.DirectoryId);
+            var Moedel = new Tasks()
+            {
+                Id = model.Id,
+                Title = model.Title,
+                Directory = Dir
+
+            };
+            Context.DeleteTask(Moedel);
+        }
+
         public void AddTask(TasksEditModel model)
         {
             var Dir = Context.GetDirectory(model.DirectoryId);

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using WebTasks.Data.DataLayer;
 
 namespace WebTasks.Models
@@ -64,7 +65,7 @@ namespace WebTasks.Models
             return CurrentDir;
         }
 
-        Directory IDataBaseAdapter.DeleteDirectories(Directory dir)
+        Directory IDataBaseAdapter.DeleteDirectory(Directory dir)
         {
             var CurrentDir = context.Directories.First(x=>x.Id==dir.Id);
             if (CurrentDir == null) return null;
@@ -97,5 +98,14 @@ namespace WebTasks.Models
         }
 
         public Tasks GetTask(int id)=>context.Tasks.First(x=>x.Id == id);
+
+        public Tasks DeleteTask(Tasks model)
+        {
+            var CurrentTask = context.Tasks.First(x => x.Id == model.Id);
+            if (CurrentTask == null) return null;
+            context.Remove(model);
+            context.SaveChanges();
+            return CurrentTask;
+        }
     }
 }
