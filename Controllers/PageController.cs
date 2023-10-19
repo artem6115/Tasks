@@ -19,7 +19,15 @@ namespace WebTasks.Controllers
         }
         public ActionResult Index()
         {
-            return View();
+            return View(MyDirectoryService.GetAllDirectories());
+        }
+        public ActionResult Directory(int id)
+        {
+            return View(MyDirectoryService.GetDirectory(id));
+        }
+        public ActionResult Task(int id)
+        {
+            return View(MyTasksService.GetTask(id));
         }
 
         [HttpPost]

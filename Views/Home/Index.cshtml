@@ -1,14 +1,18 @@
-﻿@using DataLayer.Entities;
+﻿@using WebTasks.Services;
+@using DataLayer.Entities;
+
 @{
     ViewData["Title"] = "Home Page";
 }
 @model List<Directory>
 <div class="">
 
-   @foreach (Directory item in Model)
+   @foreach (var item in Model)
     {
-        
-            <p>@item.Title</p><br>
+
+        <p>@item.Title</p>
+
+        <br>
             <ul>
             @foreach (var task in item.MyTasks ?? new List<Tasks>(0))
             {

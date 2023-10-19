@@ -1,0 +1,25 @@
+﻿@using WebTasks.Services;
+@using DataLayer.Entities;
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+@model List<DirectoryViewModel>
+<div class="">
+
+    @foreach (var item in Model)
+    {
+
+        <p><a asp-action="Directory" asp-controller="Page" asp-route-id="@item.Id">@item.Title</a></p>
+
+        <br>
+        <ul>
+            @foreach (var task in item.Tasks ?? new List<Tasks>(0))
+            {
+                <li class="ml-3 pl-3 "><a asp-action="Taks" asp-controller="Page" asp-route-id="@task.Id">@task.Title</a></li>
+            }
+        </ul>
+        <hr>
+    }
+
+</div>
